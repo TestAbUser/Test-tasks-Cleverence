@@ -13,19 +13,10 @@ namespace CompressionAlgorithm
             ArgumentException.ThrowIfNullOrEmpty(line, nameof(line));
             string compressedLine =line;
 
-            if (line[1].Equals(line[0]))
-            {
-                 compressedLine = line[0]+line.Length.ToString();
-            }
-            //for (int i=1;i<=line.Length;i++)
-            //{
-            //    if(line[i] == line[i-1])
-            //    {
+           var charArray = line.TakeWhile(x => line.Contains(x)).ToArray();
 
-            //    }
-            //}
-            
-           // string compressedString = line;
+                 compressedLine = charArray[0]+charArray.Length.ToString();
+           
             return compressedLine;
         }
     }

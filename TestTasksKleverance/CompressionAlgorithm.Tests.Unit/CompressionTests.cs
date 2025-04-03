@@ -22,13 +22,13 @@
         }
 
         [Fact]
-        public void Line_has_two_consecutive_identical_letters()
+        public void Line_has_several_consecutive_identical_letters()
         {
-            const string line = "aa";
+            const string line = "aaa";
             
             var compressedLine = Compressor.Compress(line);
 
-            Assert.Equal("a2", compressedLine);
+            Assert.Equal("a3", compressedLine);
         }
 
 
