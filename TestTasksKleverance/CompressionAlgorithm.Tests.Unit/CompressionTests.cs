@@ -11,6 +11,18 @@
             Compressor.Compress(line));
         }
 
+        [Theory]
+        [InlineData("a")]
+        [InlineData("abcdef")]
+        public void Line_has_unique_letters(string line)
+        {
+
+            var compressedLine = Compressor.Compress(line);
+
+            Assert.Equal(line, compressedLine);
+        }
 
     }
 }
+
+
