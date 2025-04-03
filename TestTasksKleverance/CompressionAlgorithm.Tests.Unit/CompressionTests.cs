@@ -16,11 +16,22 @@
         [InlineData("abcdef")]
         public void Line_has_unique_letters(string line)
         {
-
             var compressedLine = Compressor.Compress(line);
 
             Assert.Equal(line, compressedLine);
         }
+
+        [Fact]
+        public void Line_has_two_consecutive_identical_letters()
+        {
+            const string line = "aa";
+            
+            var compressedLine = Compressor.Compress(line);
+
+            Assert.Equal("a2", compressedLine);
+        }
+
+
 
     }
 }
