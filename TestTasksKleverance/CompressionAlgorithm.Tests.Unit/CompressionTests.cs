@@ -22,13 +22,19 @@
         }
 
         [Fact]
-        public void Line_has_several_consecutive_identical_letters()
+        public void Line_has_groups_of_repeating_and_separate_letters()
         {
-            const string line = "aaa";
+            const string Line = "abaaabaabccbbbd";
             
-            var compressedLine = Compressor.Compress(line);
+            var compressedLine = Compressor.Compress(Line);
 
-            Assert.Equal("a3", compressedLine);
+            Assert.Equal("aba3ba2bc2b3d", compressedLine);
+        }
+
+        [Fact]
+        public void Decompress_compressed_line()
+        {
+
         }
 
 
