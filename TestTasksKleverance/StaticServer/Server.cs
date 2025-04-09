@@ -21,8 +21,6 @@ namespace StaticServer
             {
                 count += value;
             }
-            //count+=value;
-
         }
     }
 }
