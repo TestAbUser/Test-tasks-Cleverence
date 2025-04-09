@@ -24,17 +24,21 @@
         [Fact]
         public void Line_has_groups_of_repeating_and_separate_letters()
         {
-            const string Line = "abaaabaabccbbbd";
+            const string Line = "ababaabccbbbdddddddddd";
             
             var compressedLine = Compressor.Compress(Line);
 
-            Assert.Equal("aba3ba2bc2b3d", compressedLine);
+            Assert.Equal("ababa2bc2b3d10", compressedLine);
         }
 
         [Fact]
         public void Decompress_compressed_line()
         {
+            const string CompressedLine = "a2cdfg10s";
 
+            string decompressedLine = Compressor.Decompress(CompressedLine);
+
+            Assert.Equal("aacdfggggggggggs", decompressedLine);
         }
 
 
