@@ -1,8 +1,14 @@
-﻿namespace StaticServer
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StaticServer
 {
     public static class Server
     {
-        public static int count;
+        private static int count;
         private static readonly object _locker = new object();
         public static int GetCount()
         {
@@ -11,12 +17,12 @@
 
         public static int AddToCount(int value)
         {
-            count = value;
-            return 0;
+            lock (_locker)
+            {
+                count = value;
+            }
+
+            return count;
         }
     }
-
-
 }
-
-
