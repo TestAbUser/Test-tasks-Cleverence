@@ -58,7 +58,7 @@ namespace CompressionAlgorithm
             for (int i = 0; i < line.Length; i++)
             {
                 int j = 0;
-                if (char.IsLetter(line[i]) && i+1<line.Length)
+                if (char.IsLetter(line[i]) && i + 1 < line.Length)
                 {
                     j = i;
                     while (j < line.Length - 1 && char.IsDigit(line[j + 1]))
@@ -69,7 +69,7 @@ namespace CompressionAlgorithm
 
                 if (j > i)
                 {
-                    decompressedLine.Append(line[i], int.Parse(line.Substring(i + 1, j-i)));
+                    decompressedLine.Append(line[i], int.Parse(line.Substring(i + 1, j - i)));
                     i = j;
                 }
                 else
