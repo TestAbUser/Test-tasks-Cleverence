@@ -5,22 +5,40 @@ namespace LogFileStandardization.Tests.Unit
 {
     public class LogFormatterTests
     {
-        [Fact]
-        public void Transform_log_entries_from_format1_to_a_new_format()
+        [Theory]
+        [MemberData(nameof(Data))]
+        public void Format_log_entries(string originalFormat, string newFormat)
         {
-            //arrange
-
-            string format1 = "10.03.2025 15:14:49.523 INFORMATION Версия программы: '3.4.0.48729'"+
-                "10.03.2025 15:14:49.523 INFORMATION Версия программы: '3.4.0.48729'";
             var sut = new LogFormatter();
 
-            // act
-            string result =sut.Format(format1);
+            string result = sut.Format(originalFormat);
 
-            //assert
-            var newFormat = "2025-03-10\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'"
-                + "2025-03-10\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'";
             Assert.Equal(newFormat, result);
         }
+
+        public static IEnumerable<object[]> Data =>
+            new List<object[]>
+            {
+                new object[]
+                {
+                    "10.03.2025 15:14:49.523 INFORMATION Версия программы: '3.4.0.48729'"+
+                    "10.03.2025 15:14:49.523 INFORMATION Версия программы: '3.4.0.48729'",
+
+                    "2025-03-10\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
+                    "2025-03-10\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'"
+                },
+                new object[]
+                {
+                    "10.03.2025 15:14:49.523 INFORMATION Версия программы: '3.4.0.48729'"+
+                    "10.03.2025 15:14:49.523 WARNING Версия программы: '3.4.0.48729'"+
+                    "10.03.2025 15:14:49.523 ERROR Версия программы: '3.4.0.48729'"+
+                    "10.03.2025 15:14:49.523 DEBUG Версия программы: '3.4.0.48729'",
+
+                    "2025-03-10\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
+                    "2025-03-10\t15:14:49.523\tWARN\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
+                    "2025-03-10\t15:14:49.523\tERROR\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
+                    "2025-03-10\t15:14:49.523\tDEBUG\tDEFAULT\tВерсия программы: '3.4.0.48729'"
+                }
+            };
     }
 }
