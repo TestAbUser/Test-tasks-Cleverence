@@ -13,7 +13,7 @@
             string result =sut.Format(format1);
 
             //assert
-            var newFormat = "2025-03-10 15:14:49.523 INFO";
+            var newFormat ="2025-03-10\t15:14:49.523\tINFO";
             Assert.Equal(newFormat, result);
         }
     }
