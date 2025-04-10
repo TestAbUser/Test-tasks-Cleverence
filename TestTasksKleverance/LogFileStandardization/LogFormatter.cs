@@ -13,16 +13,22 @@ namespace LogFileStandardization
 
         public string Format(string log)
         {
-            // Regex regex = new();
+             Regex dateRegex = new("([0-3][0-9]\\.[0-1][0-9]\\.[0-9]{4})");
             string newLog = "";//new string[log.Length];
-            //foreach (var item in log)
-            //{
-            var culture= CultureInfo.GetCultureInfo("ru-RU");
-                if(DateOnly.TryParse(log, culture, out DateOnly date))
+                               //foreach (var item in log)
+                               //{
+                               // Regex regexInfoLoggingLevel = new("INFORMATION");
+                               //string warningLoggingLevel = "WARNING";
+            string originalDateFormat =dateRegex.Match(log).ToString();
+            var rusCulture= CultureInfo.GetCultureInfo("ru-RU");
+                if(DateOnly.TryParse(originalDateFormat, rusCulture, out DateOnly date))
                 {
-                    newLog = log.Replace(log, date.ToString("o", CultureInfo.InvariantCulture));
+                    newLog = log.Replace(originalDateFormat, date.ToString("o", CultureInfo.InvariantCulture));
                 }
-           // }
+
+            newLog = newLog.Replace("INFORMATION", "INFO");
+             newLog = newLog.Replace("WARNING","WARN");
+            // }
             return newLog;
         }
     }
