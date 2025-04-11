@@ -9,7 +9,7 @@ namespace LogFileStandardization.Tests.Unit
         [MemberData(nameof(Data))]
         public void Format_log_entries(string originalFormat, string newFormat)
         {
-            var sut = new LogFormatter();
+            LogFormatter sut = new();
 
             string result = sut.Format(originalFormat);
 
@@ -24,8 +24,8 @@ namespace LogFileStandardization.Tests.Unit
                     "10.03.2025 15:14:49.523 INFORMATION Версия программы: '3.4.0.48729'"+
                     "10.03.2025 15:14:49.523 INFORMATION Версия программы: '3.4.0.48729'",
 
-                    "2025-03-10\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
-                    "2025-03-10\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'"
+                    "10-03-2025\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
+                    "10-03-2025\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'"
                 },
                 new object[]
                 {
@@ -34,11 +34,19 @@ namespace LogFileStandardization.Tests.Unit
                     "10.03.2025 15:14:49.523 ERROR Версия программы: '3.4.0.48729'"+
                     "10.03.2025 15:14:49.523 DEBUG Версия программы: '3.4.0.48729'",
 
-                    "2025-03-10\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
-                    "2025-03-10\t15:14:49.523\tWARN\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
-                    "2025-03-10\t15:14:49.523\tERROR\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
-                    "2025-03-10\t15:14:49.523\tDEBUG\tDEFAULT\tВерсия программы: '3.4.0.48729'"
+                    "10-03-2025\t15:14:49.523\tINFO\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
+                    "10-03-2025\t15:14:49.523\tWARN\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
+                    "10-03-2025\t15:14:49.523\tERROR\tDEFAULT\tВерсия программы: '3.4.0.48729'"+
+                    "10-03-2025\t15:14:49.523\tDEBUG\tDEFAULT\tВерсия программы: '3.4.0.48729'"
+                },
+
+                new object[]
+                {
+                    "2025-03-10 15:14:51.5882| INFO|11|MobileComputer.GetDeviceId| Код устройства: '@MINDEO-M40-D-410244015546'",
+
+                    "10-03-2025\t15:14:51.5882\tINFO\tMobileComputer.GetDeviceId\tКод устройства: '@MINDEO-M40-D-410244015546'"
                 }
+
             };
     }
 }
