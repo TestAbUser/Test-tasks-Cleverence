@@ -11,24 +11,26 @@ namespace LogFileStandardization
     public class LogFormatter
     {
 
-        public string Format(string originalLog)
+        public string Format(string? originalLog)
         {
+            ArgumentNullException.ThrowIfNull(originalLog, nameof(originalLog));
+
             Regex format1Date = new(@"(?<!\S)([0-3][0-9]\.[0-1][0-9]\.[0-9]{4})(?!\S)");
             Regex format2Date = new(@"(?<!\S)([0-9]{4}-[0-1][0-9]-[0-3][0-9](?!\S))");
-           
+
             StringBuilder resultLog = new(originalLog);
 
-            // string originalDateFormat = format1Date.Match(originalLog).ToString();
             string originalDateFormat = format1Date.IsMatch(originalLog) ?
                 format1Date.Match(originalLog).ToString() :
                 format2Date.Match(originalLog).ToString();
+
             var rusCulture = CultureInfo.GetCultureInfo("ru-RU");
+
             if (DateOnly.TryParse(originalDateFormat, rusCulture, out DateOnly date))
             {
                 resultLog.Replace(originalDateFormat + " ", date.ToString("dd-MM-yyyy\t", CultureInfo.InvariantCulture));
             }
-            string callingMethod = "DEFAULT\t";
-
+            const string callingMethod = "DEFAULT\t";
 
             if (originalLog.Contains('|'))
             {
@@ -45,7 +47,7 @@ namespace LogFileStandardization
                 string? debug = debugRegex.Match(originalLog).ToString();
 
                 if (infoRegex.IsMatch(originalLog))
-                    resultLog= resultLog.Replace(info, "INFO|");
+                    resultLog = resultLog.Replace(info, "INFO|");
 
                 if (warnRegex.IsMatch(originalLog))
                     resultLog = resultLog.Replace(warning, "WARN|");
@@ -58,17 +60,22 @@ namespace LogFileStandardization
 
                 resultLog = resultLog.Replace("|", "\t");
 
-                 return resultLog.ToString();
+                return resultLog.ToString();
             }
             else
             {
-
                 resultLog.Replace(" INFORMATION ", $"\tINFO\t{callingMethod}")
                     .Replace(" WARNING ", $"\tWARN\t{callingMethod}")
                     .Replace(" ERROR ", $"\tERROR\t{callingMethod}")
                     .Replace(" DEBUG ", $"\tDEBUG\t{callingMethod}");
             }
-                return resultLog.ToString();
+
+            const int correctNumberOfColumns = 5;
+            if (resultLog.ToString().Split("\t").Length != correctNumberOfColumns)
+            {
+                return originalLog;
+            }
+            return resultLog.ToString();
         }
     }
 }

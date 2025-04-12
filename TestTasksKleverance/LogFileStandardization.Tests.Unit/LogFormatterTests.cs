@@ -45,6 +45,19 @@ namespace LogFileStandardization.Tests.Unit
                     "2025-03-10 15:14:51.5882| INFO|11|MobileComputer.GetDeviceId| Код устройства: '@MINDEO-M40-D-410244015546'",
 
                     "10-03-2025\t15:14:51.5882\tINFO\tMobileComputer.GetDeviceId\tКод устройства: '@MINDEO-M40-D-410244015546'"
+                },
+
+                new object[]
+                {
+                    "2025-03-10 15:14:51.5882| INFO|11|MobileComputer.GetDeviceId| Код устройства: '@MINDEO-M40-D-410244015546'"+
+                    "2025-03-10 15:14:51.5882| WARN|31|MobileComputer.GetDeviceId| Код устройства: '@MINDEO-M40-D-410244015546'"+
+                    "2025-03-10 15:14:51.5882| ERROR|01|MobileComputer.GetDeviceId| Код устройства: '@MINDEO-M40-D-410244015546'"+
+                    "2025-03-10 15:14:51.5882| DEBUG|7|MobileComputer.GetDeviceId| Код устройства: '@MINDEO-M40-D-410244015546'",
+
+                    "10-03-2025\t15:14:51.5882\tINFO\tMobileComputer.GetDeviceId\tКод устройства: '@MINDEO-M40-D-410244015546'"+
+                    "10-03-2025\t15:14:51.5882\tWARN\tMobileComputer.GetDeviceId\tКод устройства: '@MINDEO-M40-D-410244015546'"+
+                    "10-03-2025\t15:14:51.5882\tERROR\tMobileComputer.GetDeviceId\tКод устройства: '@MINDEO-M40-D-410244015546'"+
+                    "10-03-2025\t15:14:51.5882\tDEBUG\tMobileComputer.GetDeviceId\tКод устройства: '@MINDEO-M40-D-410244015546'"
                 }
 
             };
