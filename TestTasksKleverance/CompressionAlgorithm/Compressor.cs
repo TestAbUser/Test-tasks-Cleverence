@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace CompressionAlgorithm
 {
@@ -29,9 +25,6 @@ namespace CompressionAlgorithm
                     }
 
                     else compressedLine.Append(line[i]);
-                    //if (i + 2 == line.Length)
-                    //    compressedLine += line[i + 1];
-
                 }
                 if (i + 2 == line.Length && !line[i].Equals(line[i + 1]))
                     compressedLine.Append(line[i + 1]);
@@ -39,13 +32,6 @@ namespace CompressionAlgorithm
                 if (i + 2 == line.Length && line[i].Equals(line[i + 1]))
                     compressedLine.Append(line[i] + count.ToString());
             }
-            //var charArray = line.TakeWhile(x => x.Equals(l);
-            //line.Contains(x)).ToArray();
-
-            //var charArray = line.TakeWhile(x =>
-            //line.Contains(x)).ToArray();
-
-            // compressedLine = charArray[0] + charArray.Length.ToString();
 
             return compressedLine.ToString();
         }
