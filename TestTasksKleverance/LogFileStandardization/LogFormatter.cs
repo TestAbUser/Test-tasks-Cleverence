@@ -79,7 +79,7 @@ namespace LogFileStandardization
 
                 }
             }
-            return resultLog.ToString().Split("\r");
+            return resultLog.ToString().Split("\n");
         }
     }
 }
