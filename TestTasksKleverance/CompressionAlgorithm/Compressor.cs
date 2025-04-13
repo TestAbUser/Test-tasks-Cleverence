@@ -8,8 +8,7 @@ namespace CompressionAlgorithm
         public static string Compress(string? line)
         {
             ArgumentException.ThrowIfNullOrEmpty(line, nameof(line));
-            //if (line.Length == 1)
-            //    return line;
+
             StringBuilder compressedLine = new();
             char prevChar = line[0];
             int count = 0;
@@ -40,30 +39,26 @@ namespace CompressionAlgorithm
             ArgumentException.ThrowIfNullOrEmpty(line, nameof(line));
 
             StringBuilder decompressedLine = new();
-            for (int i = 0; i < line.Length; i++)
+            string? number = default;
+            foreach (var @char in line.Reverse())
             {
-                int j = 0;
-                if (char.IsLetter(line[i]) && i + 1 < line.Length)
+                if (char.IsLetter(@char))
                 {
-                    j = i;
-                    while (j < line.Length - 1 && char.IsDigit(line[j + 1]))
-                    {
-                        j++;
-                    }
-                }
+                    _ = int.TryParse(number, out int numb);
 
-                if (j > i)
-                {
-                    decompressedLine.Append(line[i], int.Parse(line.Substring(i + 1, j - i)));
-                    i = j;
+                    decompressedLine.Append(GetPartialResult(@char, numb));
+                    number = default;
                 }
-                else
+                else if (char.IsDigit(@char))
                 {
-                    j = 0;
-                    decompressedLine.Append(line[i]);
+                    number = @char + number;
                 }
             }
-            return decompressedLine.ToString();
+
+            static string GetPartialResult(char @char, int number) =>
+                number == 0 ? new(@char, 1) : new(@char, number);
+
+            return string.Concat(decompressedLine.ToString().Reverse());
         }
     }
 }

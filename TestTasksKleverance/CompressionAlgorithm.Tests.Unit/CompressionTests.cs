@@ -34,11 +34,11 @@
         [Fact]
         public void Decompress_compressed_line()
         {
-            const string CompressedLine = "a2cdfg10s";
+            const string CompressedLine = "a2cd2fg10s11";
 
             string decompressedLine = Compressor.Decompress(CompressedLine);
 
-            Assert.Equal("aacdfggggggggggs", decompressedLine);
+            Assert.Equal("aacddfggggggggggsssssssssss", decompressedLine);
         }
     }
 }
