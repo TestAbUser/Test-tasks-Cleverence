@@ -8,34 +8,31 @@ namespace CompressionAlgorithm
         public static string Compress(string? line)
         {
             ArgumentException.ThrowIfNullOrEmpty(line, nameof(line));
-            if (line.Length == 1)
-                return line;
+            //if (line.Length == 1)
+            //    return line;
             StringBuilder compressedLine = new();
-            int count = 1;
-            for (int i = 0; i < line.Length - 1; i++)
+            char prevChar = line[0];
+            int count = 0;
+            foreach (var @char in line)
             {
-                if (line[i].Equals(line[i + 1]))
+                if (@char.Equals(prevChar))
                 {
                     count++;
                 }
                 else
                 {
-                    if (count > 1)
-                    {
-                        compressedLine.Append(line[i] + count.ToString());
-                        count = 1;
-                    }
-
-                    else compressedLine.Append(line[i]);
+                    compressedLine.Append(GetPartialResult(prevChar, count));
+                    prevChar = @char;
+                    count = 1;
                 }
-                if (i + 2 == line.Length && !line[i].Equals(line[i + 1]))
-                    compressedLine.Append(line[i + 1]);
-
-                if (i + 2 == line.Length && line[i].Equals(line[i + 1]))
-                    compressedLine.Append(line[i] + count.ToString());
             }
+            compressedLine.Append(GetPartialResult(prevChar, count));
 
-            return compressedLine.ToString();
+            return compressedLine.Length < line.Length ?
+                compressedLine.ToString() : line;
+
+            static string GetPartialResult(char prevChar, int count) =>
+         prevChar + (count > 1 ? count.ToString() : string.Empty);
         }
 
         public static string Decompress(string? line)
