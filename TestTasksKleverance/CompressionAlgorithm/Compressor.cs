@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿
+using System.Text;
 
 namespace CompressionAlgorithm
 {
@@ -7,7 +8,8 @@ namespace CompressionAlgorithm
         public static string Compress(string? line)
         {
             ArgumentException.ThrowIfNullOrEmpty(line, nameof(line));
-
+            if (line.Length == 1)
+                return line;
             StringBuilder compressedLine = new();
             int count = 1;
             for (int i = 0; i < line.Length - 1; i++)
